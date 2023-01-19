@@ -12,7 +12,7 @@ const Calculator = ({
   calculatorState,
   setCalculatorState,
 }: CalculatorProps) => {
-  const { validateInput } = useCalculator();
+  const { validateInput } = useCalculator({ setCalculatorState });
 
   const addToResult = (value: string) => {
     setCalculatorState((prev) => prev + value);
@@ -50,6 +50,7 @@ const Calculator = ({
           className="bg-gray-50 w-full h-12 focus-visible:outline-none text-5xl"
           onKeyDown={validateInput}
           value={calculatorState}
+          onChange={() => {}}
         />
       </div>
       <div className="w-full bg-white grid grid-cols-4 gap-y-2">
