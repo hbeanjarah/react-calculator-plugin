@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "./Button";
 import { useCalculator } from "./hooks/useCalculator";
 import { Uturn } from "./icon/Uturn";
@@ -13,7 +13,7 @@ const Calculator = ({
   setCalculatorState,
 }: CalculatorProps) => {
   const { validateInput } = useCalculator({ setCalculatorState });
-
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const addToResult = (value: string) => {
     setCalculatorState((prev) => prev + value);
   };
@@ -41,11 +41,16 @@ const Calculator = ({
     setCalculatorState(String(suqaredResult));
   };
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <div className="w-2/6">
       <div className="w-full h-28 flex items-center">
         <input
           type="text"
+          ref={inputRef}
           id="first_name"
           className="bg-gray-50 w-full h-12 focus-visible:outline-none text-5xl"
           onKeyDown={validateInput}
